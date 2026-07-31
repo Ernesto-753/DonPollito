@@ -3,6 +3,8 @@ import Layout from '../components/Layout';
 import { Card } from '../components/ui/card';
 import { CATEGORIAS } from '../data/categorias';
 
+// Cada categoría enlaza a Inicio con ?categoria=<nombre> para preseleccionar
+// el mismo filtro que usa la grilla de productos de la página de Inicio.
 export default function Categorias() {
   return (
     <Layout>

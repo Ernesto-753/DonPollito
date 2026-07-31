@@ -7,11 +7,10 @@ import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { obtenerProducto, formatoMoneda } from '../data/productos';
 
-
 const RESPALDO = {
-  nombre: 'Leche Alpura',
-  precio: 25.0,
-  caracteristicas: ['1 litro entera', 'Ultrapasteurizada', 'Fuente de calcio', 'Envase reciclable'],
+  nombre: '_________',
+  precio: 0.0,
+  caracteristicas: ['_________', '_________', '_________', '_________'],
 };
 
 export default function ProductoDetalle() {
@@ -39,23 +38,34 @@ export default function ProductoDetalle() {
     <Layout>
       <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center max-w-5xl">
         <div className="relative w-full max-w-sm mx-auto aspect-square flex items-center justify-center">
-          {producto?.imagen ? (
-            <img src={producto.imagen} alt={producto.nombre} className="w-full h-full object-cover rounded-2xl" />
-          ) : (
-            <>
-              <div
-                className="absolute inset-0 bg-gold/5 border-2 border-gold/30"
-                style={{ clipPath: 'polygon(30% 2%, 70% 2%, 98% 30%, 98% 70%, 70% 98%, 30% 98%, 2% 70%, 2% 30%)' }}
-              />
-              <div className="relative flex flex-col items-center gap-3 text-maroon">
-                <Milk className="size-16" strokeWidth={1.5} />
-                <span className="font-subtitle font-bold tracking-[0.2em] text-sm">
-                  {(producto ? producto.nombre : RESPALDO.nombre).toUpperCase()}
-                </span>
-              </div>
-            </>
-          )}
+      {producto?.imagen ? (
+        <div className="relative w-full h-full rounded-2xl bg-black/[0.02] border border-black/10 flex items-center justify-center overflow-hidden p-6">
+          <img
+            src={producto.imagen}
+            alt={producto.nombre}
+            className="max-w-full max-h-full w-auto h-auto object-contain"
+          />
         </div>
+
+      ) : (
+        <>
+          <div
+            className="absolute inset-0 bg-gold/5 border-2 border-gold/30"
+            style={{
+              clipPath:
+                'polygon(30% 2%, 70% 2%, 98% 30%, 98% 70%, 70% 98%, 30% 98%, 2% 70%, 2% 30%)'
+            }}
+          />
+          <div className="relative flex flex-col items-center gap-3 text-maroon">
+            <Milk className="size-16" strokeWidth={1.5} />
+            <span className="font-subtitle font-bold tracking-[0.2em] text-sm">
+              {(producto ? producto.nombre : RESPALDO.nombre).toUpperCase()}
+            </span>
+          </div>
+    </>
+)}
+
+</div>
         <div>
           <h1 className="font-title text-3xl md:text-4xl text-maroon mb-2">{nombre}</h1>
           <p className="font-subtitle text-2xl md:text-3xl text-gold font-bold mb-6">{formatoMoneda(precio)}</p>

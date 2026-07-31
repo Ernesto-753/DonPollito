@@ -1,6 +1,8 @@
 import { cva } from 'class-variance-authority';
 import { cn } from '../../lib/utils';
 
+// Mismo patrón que src/components/ui/badge.tsx de JAN, con la paleta de
+// Don Pollito. `success` usa el verde hoja reservado para mensajes/alertas.
 export const badgeVariants = cva(
   'inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-subtitle font-semibold',
   {

@@ -6,6 +6,16 @@ import { useCart } from '../context/CartContext';
 import { useToast } from '../context/ToastContext';
 import { formatoMoneda } from '../data/productos';
 
+// Tarjeta de producto usada en Inicio, Recomendaciones y Buscar. Ahora es un
+// <Card /> (estilo "neo" tomado de JAN: rounded-2xl, sin borde, sombra que
+// crece y la tarjeta se levanta al pasar el mouse) y trae su propio botón
+// "Añadir al Carrito" — igual que en el boceto — para poder comprar
+// directo desde la grilla sin depender de una página de detalle.
+//
+// La imagen y el nombre siempre enlazan a /producto/:id: como
+// ProductoDetalle.jsx ya sabe mostrar el detalle de cualquier producto del
+// catálogo, cada tarjeta apunta directo ahí (el botón de abajo usa
+// stopPropagation para poder agregar al carrito sin disparar la navegación).
 export default function TarjetaProducto({ producto }) {
   const { agregarAlCarrito } = useCart();
   const { show } = useToast();

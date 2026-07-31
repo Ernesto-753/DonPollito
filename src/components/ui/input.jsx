@@ -1,6 +1,9 @@
 import { forwardRef } from 'react';
 import { cn } from '../../lib/utils';
 
+// Igual que src/components/ui/input.tsx de JAN, con el estilo "neo" (fondo
+// suave, sin borde marcado, focus en dorado) en vez del input con borde
+// sólido que usaba el sitio original.
 export const Input = forwardRef(({ className, type, ...props }, ref) => (
   <input
     type={type}

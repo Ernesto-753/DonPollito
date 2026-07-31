@@ -4,6 +4,9 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Button } from './button';
 
+// Puerto directo de src/components/ui/carousel.tsx de JAN (mismo uso de
+// embla-carousel-react y la misma composición Carousel/CarouselContent/
+// CarouselItem/CarouselPrevious/CarouselNext), sin los tipos de TypeScript.
 const CarouselContext = createContext(null);
 
 function useCarousel() {

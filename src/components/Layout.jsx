@@ -5,6 +5,8 @@ import { useCart } from '../context/CartContext';
 import SearchBar from './SearchBar';
 import { cn } from '../lib/utils';
 
+// Enlaces del menú — ahora horizontales, arriba, en vez del menú lateral
+// que tenía el sitio original.
 const ENLACES_NAV = [
   { id: 'inicio', href: '/', etiqueta: 'Inicio', icono: Home },
   { id: 'categorias', href: '/categorias', etiqueta: 'Categorías', icono: LayoutGrid },
@@ -24,8 +26,8 @@ function idPaginaActiva(pathname) {
 function Banner() {
   return (
     <div className="bg-gold text-ink text-center text-xs sm:text-sm font-subtitle font-semibold py-2 px-4 flex items-center justify-center gap-2">
-      <Truck className="size-4 shrink-0" />
-      <span className="text-white">Oferta por tiempo limitado — Envío gratis en compras mayores a $500</span>
+      <Truck className=" text-white size-4 shrink-0 w-5 h-5" />
+      <span className="text-white">Oferta por tiempo limitado — envío gratis en compras mayores a $500</span>
     </div>
   );
 }
@@ -33,7 +35,7 @@ function Banner() {
 function LogoDonPollito() {
   return (
     <Link to="/" className="order-1 flex items-center gap-2 shrink-0">
-      <img src="/icono.png" className="w-8 h-8" alt="Don Pollito" />
+      <img src="/icono.png" className="w-20 h-20" alt="Don Pollito" />
       <span className="font-title text-2xl md:text-3xl text-maroon tracking-wide">Don Pollito</span>
     </Link>
   );
@@ -121,6 +123,10 @@ function Header({ paginaActiva }) {
 
   return (
     <header className="w-full bg-paper/90 backdrop-blur-md border-b border-black/10 sticky top-0 z-30">
+      {/* Un solo <SearchBar/>: en vez de montar dos instancias (una para
+          escritorio y otra para móvil, cada una con su propio estado),
+          esta única instancia se reubica con clases de Tailwind (order +
+          w-full/flex-1) según el ancho de pantalla. */}
       <div className="px-4 md:px-10 py-3 md:py-4 flex flex-wrap items-center gap-3 md:gap-6">
         <LogoDonPollito />
         <NavDesktop paginaActiva={paginaActiva} />
@@ -148,45 +154,28 @@ function Footer() {
     <footer className="bg-maroon text-paper/70 font-body text-sm py-6 px-4 mt-auto">
       
       <div className="text-center">
-        
         {/* Contacto */}
         <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-6">
-          <a
-            href="mailto:DonPollito@gmail.com"
-            className="hover:text-paper transition"
-          >
-            Contacto: DonPollito@gmail.com
-          </a>
-
-          <a
-            href="tel:7531006767"
-            className="hover:text-paper transition"
-          >
-            Teléfono: 742-100-4767
-          </a>
+          <a href="mailto:DonPollito@gmail.com" className="hover:text-paper transition">Contacto: DonPollito@gmail.com</a>
+          <a href="tel:7531006767" className="hover:text-paper transition">Teléfono: 753-100-6767</a>
         </div>
 
         {/* Horario */}
         <div className="flex flex-col md:flex-row justify-center items-center gap-2 md:gap-6 mt-2">
-          <span>
-            Horario: Martes a Domingo 10:00 am - 8:00 pm
-          </span>
+          <span>Horario: Martes a Domingo 10:00 am - 8:00 pm</span>
         </div>
       </div>
 
+      {/* Derechos reservados */}
       <div className="border-t border-paper/10 mt-8 pt-6 text-center">
         <p>
           &copy; 2026 Don Pollito. Todos los derechos reservados.
         </p>
       </div>
-
     </footer>
   );
 }
 
-// Layout general: banner + header (con nav arriba) + <main>{children}</main>
-// + footer. Ya no hay menú lateral: el menú se movió arriba y el ancho
-// completo queda libre para el contenido.
 export default function Layout({ children, showBanner = true }) {
   const location = useLocation();
   const paginaActiva = idPaginaActiva(location.pathname);

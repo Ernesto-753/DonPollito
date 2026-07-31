@@ -31,9 +31,6 @@ const SLIDES = [
   },
 ];
 
-// Carrusel de banner para Inicio — usa el mismo componente Carousel (puerto
-// de JAN sobre embla-carousel-react) más el plugin de autoplay, con puntos
-// indicadores como pide el boceto.
 export default function HeroCarousel() {
   const [seleccionado, setSeleccionado] = useState(0);
   const apiRef = useRef(null);

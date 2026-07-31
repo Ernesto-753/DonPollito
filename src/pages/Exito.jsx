@@ -18,10 +18,14 @@ export default function Exito() {
   return (
     <Layout showBanner={false}>
       <div className="flex flex-col items-center justify-center text-center py-16 max-w-lg mx-auto">
-        <div className="w-24 h-24 rounded-full bg-leaf/10 flex items-center justify-center mb-6 text-leaf">
-          <CheckCircle2 className="size-14" />
+        <div className="w-40 h-40 rounded-full bg-leaf/10 flex items-center justify-center mb-6 text-leaf">
+          <CheckCircle2 className="size-30" />
         </div>
-        <img className="w-32 h-32 object-contain mb-6" src="/public/polloPulgar44.png" alt="Pollo" />
+        <img
+            className="h-auto object-contain"
+            src="/polloPulgar44.png"
+            alt="Pollito pulgar arriba"
+          />
         <h1 className="font-title text-3xl md:text-4xl text-maroon mb-3">Compra Exitosa</h1>
         <p className="font-body text-leaf font-semibold mb-8">¡Gracias por su compra!</p>
         <Link to="/" className={buttonVariants({ size: 'lg' })}>

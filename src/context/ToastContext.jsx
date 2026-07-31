@@ -2,6 +2,9 @@ import { createContext, useCallback, useContext, useRef, useState } from 'react'
 import { CheckCircle2, Info, X } from 'lucide-react';
 import { cn } from '../lib/utils';
 
+// Mensajes y alertas del sistema — usan el verde hoja (#13582d) como pidió
+// el usuario para esta paleta. Aparecen abajo a la derecha y se
+// autodestruyen solos.
 const ToastContext = createContext(null);
 
 let idSeq = 0;

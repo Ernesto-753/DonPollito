@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Zap } from 'lucide-react';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
@@ -10,6 +11,10 @@ import { PRODUCTOS, formatoMoneda } from '../data/productos';
 const DEADLINE_KEY = 'donpollito_flash_deadline';
 const DURACION_MS = 6 * 60 * 60 * 1000; // 6 horas
 
+// Descuentos de demostración: no existen todavía en el catálogo real, se
+// calculan aquí solo para mostrar la sección "Promociones Flash" del
+// boceto. El botón "Comprar Ahora" agrega el producto al carrito al precio
+// normal del catálogo (el carrito no maneja precios de oferta todavía).
 const DESCUENTOS_DEMO = [
   { id: 'cloralex', porcentaje: 30 },
   { id: 'boing', porcentaje: 20 },
@@ -90,16 +95,18 @@ export default function PromocionesFlash() {
             <Badge variant="default" className="absolute top-3 left-3 z-10 bg-maroon">
               -{porcentaje}%
             </Badge>
-            <div className="aspect-square w-full bg-black/[0.02] flex items-center justify-center overflow-hidden">
-              <img src={producto.imagen} alt={producto.nombre} className="w-full h-full object-contain p-6" />
-            </div>
-            <div className="p-4">
-              <h3 className="font-subtitle text-base font-semibold text-ink truncate">{producto.nombre}</h3>
-              <div className="mt-1 flex items-baseline gap-2">
-                <span className="font-body text-lg font-bold text-gold">{formatoMoneda(precioOferta)}</span>
-                <span className="font-body text-sm text-ink/40 line-through">{formatoMoneda(producto.precio)}</span>
+            <Link to={`/producto/${producto.id}`}>
+              <div className="aspect-square w-full bg-black/[0.02] flex items-center justify-center overflow-hidden">
+                <img src={producto.imagen} alt={producto.nombre} className="w-full h-full object-contain p-6" />
               </div>
-            </div>
+              <div className="p-4">
+                <h3 className="font-subtitle text-base font-semibold text-ink truncate">{producto.nombre}</h3>
+                <div className="mt-1 flex items-baseline gap-2">
+                  <span className="font-body text-lg font-bold text-gold">{formatoMoneda(precioOferta)}</span>
+                  <span className="font-body text-sm text-ink/40 line-through">{formatoMoneda(producto.precio)}</span>
+                </div>
+              </div>
+            </Link>
             <div className="px-4 pb-4">
               <Button size="sm" className="w-full" onClick={() => comprar(producto)}>
                 Comprar Ahora

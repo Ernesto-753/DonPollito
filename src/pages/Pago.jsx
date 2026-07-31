@@ -1,17 +1,37 @@
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CreditCard } from 'lucide-react';
 import Layout from '../components/Layout';
 import { Card } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
+import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
+import { obtenerProducto } from '../data/productos';
 
 export default function Pago() {
   const navigate = useNavigate();
+  const { carrito } = useCart();
+  const { show } = useToast();
+  const yaAvisado = useRef(false);
+
+  const hayProductos = Object.keys(carrito).some((id) => obtenerProducto(id));
+
+  useEffect(() => {
+    if (!hayProductos && !yaAvisado.current) {
+      yaAvisado.current = true;
+      show('Agrega productos a tu carrito antes de pagar', { tipo: 'info' });
+      navigate('/carrito', { replace: true });
+    }
+  }, [hayProductos, navigate, show]);
 
   const enviarFormulario = (evento) => {
     evento.preventDefault();
+    if (!hayProductos) return;
     navigate('/exito');
   };
+
+  if (!hayProductos) return null;
 
   return (
     <Layout showBanner={false}>
@@ -25,11 +45,11 @@ export default function Pago() {
           <form className="space-y-5" onSubmit={enviarFormulario}>
             <div>
               <label className="block font-subtitle text-sm font-semibold mb-1.5">Nombre</label>
-              <Input type="text" placeholder="Tu nombre completo" />
+              <Input required  type="text" placeholder="Tu nombre completo" />
             </div>
             <div>
               <label className="block font-subtitle text-sm font-semibold mb-1.5">Dirección</label>
-              <Input type="text" placeholder="Calle, número, colonia, ciudad" />
+              <Input required  type="text" placeholder="Calle, número, colonia, ciudad" />
             </div>
             <div className="pt-4 border-t border-black/10">
               <h2 className="font-subtitle font-bold mb-3 flex items-center gap-2">
@@ -37,10 +57,10 @@ export default function Pago() {
                 Información de Tarjeta
               </h2>
               <div className="space-y-4">
-                <Input type="text" placeholder="**** **** **** 6189" />
+                <Input required type="text" placeholder="**** **** **** 6189" />
                 <div className="grid grid-cols-2 gap-4">
-                  <Input type="text" placeholder="MM / YY" />
-                  <Input type="text" placeholder="CVV" />
+                  <Input required   type="text" placeholder="MM / YY" />
+                  <Input required  type="text" placeholder="CVV" />
                 </div>
               </div>
             </div>

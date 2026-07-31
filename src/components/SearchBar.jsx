@@ -4,6 +4,9 @@ import { Search, X } from 'lucide-react';
 import { Input } from './ui/input';
 import { PRODUCTOS, formatoMoneda } from '../data/productos';
 
+// Búsqueda funcional en el header: filtra el catálogo en tiempo real y
+// muestra hasta 6 sugerencias con foto/precio (estilo del input de
+// búsqueda de JAN — bg suave, sin borde marcado, icono a la izquierda).
 export default function SearchBar({ className = '' }) {
   const [query, setQuery] = useState('');
   const [abierto, setAbierto] = useState(false);
