@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --color-maroon: #611232;
+  --color-maroon-dark: #4a0e26;
+  --color-tinto: #2b0915;
+  --color-gold: #a57f2c;
+  --color-gold-light: #c9a44d;
+  --color-gold-dark: #8c6c25;
+  --color-ink: #000000;
+  --color-paper: #ffffff;
+  --color-leaf: #13582d;
+
+  --font-title: "Playfair Display", serif;
+  --font-subtitle: "Quicksand", sans-serif;
+  --font-body: "Carlito", sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: "Carlito", sans-serif;
+}
+
+/* Tarjeta "neo" (inspirada en JAN): sombra suave que se acentúa y la
+   tarjeta se levanta un poco al pasar el mouse. */
+.neo-card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.neo-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -15px rgb(0 0 0 / 0.18);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.toast-enter {
+  animation: toast-enter 0.2s ease-out;
+}
