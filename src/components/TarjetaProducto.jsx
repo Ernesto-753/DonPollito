@@ -9,7 +9,6 @@ import { formatoMoneda } from '../data/productos';
 export default function TarjetaProducto({ producto }) {
   const { agregarAlCarrito } = useCart();
   const { show } = useToast();
-  const esRutaInterna = producto.pagina && producto.pagina !== '#' && !producto.pagina.startsWith('http');
 
   const agregar = (evento) => {
     evento.preventDefault();
@@ -45,17 +44,10 @@ export default function TarjetaProducto({ producto }) {
 
   return (
     <Card className="neo-card-hover group flex flex-col overflow-hidden">
-      {esRutaInterna ? (
-        <Link to={producto.pagina}>
-          {imagen}
-          {info}
-        </Link>
-      ) : (
-        <div>
-          {imagen}
-          {info}
-        </div>
-      )}
+      <Link to={`/producto/${producto.id}`}>
+        {imagen}
+        {info}
+      </Link>
       <div className="px-4 pb-4">
         <Button onClick={agregar} className="w-full" size="sm">
           <ShoppingCart className="size-4" />
