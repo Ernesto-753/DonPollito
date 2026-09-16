@@ -52,7 +52,7 @@ export default function Carrito() {
                     </span>
                   </div>
                 </div>
-                <span className="font-body font-semibold">{formatoMoneda(producto.precio * cantidad)}</span>
+                <span className="font-body font-semibold">{formatoMoneda((producto.precioOferta ?? producto.precio) * cantidad)}</span>
               </div>
             ))
           )}
